@@ -25,18 +25,31 @@ public class Menu {
 					"Convertidor", JOptionPane.PLAIN_MESSAGE, null, opciones, "Conversor de monedas")).toString();
 			switch(opcion) {
 				case "Conversor de monedas":
-					double valor = Double.parseDouble(JOptionPane.showInputDialog(null, "Introduzca la cantidad a convertir"));
+					try {
+						double valor = Double.parseDouble(JOptionPane.showInputDialog(null, "Introduzca la cantidad a convertir"));
+					} catch(NumberFormatException ex) {
+						ex.printStackTrace();
+						System.out.println("Se intentó seguir con el espacio vacio");
+					}
 					String conversion = (JOptionPane.showInputDialog(null, "Elija los tipos de moneda", 
 							"Tipos de monedas", JOptionPane.PLAIN_MESSAGE, null, tiposMoneda, 
 							"De Pesos Mexicanos a Dolares")).toString();
-					System.out.println(tiposMoneda);
+					break;
+					
 				case "Conversor de temperatura":
-					float temperatura = Float.parseFloat(JOptionPane.showInputDialog(null, "Introduzca la cantidad a convertir"));
+					float valorTemperatura = Float.parseFloat(JOptionPane.showInputDialog(null, "Introduzca la cantidad a convertir", "Conversor de Temperatura", JOptionPane.DEFAULT_OPTION));
 					String[] unidadesDeMedicion= {"Celsius (°C) a Fahrenheit (°F)", "Celsius (°C) a Kelvin (K)", 
 							"Fahrenheit (°F) a Celsius (°C)", "Fahrenheit (°F) a Kelvin (K)", "Kelvin (K) a Celsius (°C)", 
 							"Kelvin (K) a Celsius (°C)"};
 					opcion = (JOptionPane.showInputDialog(null, "Selecciona la unidad de medición que quieres utilizar", 
-							"Convertidor", JOptionPane.PLAIN_MESSAGE, null, unidadesDeMedicion, "Celsius (°C) a Fahrenheit (°F)")).toString();
+							"Conversor de Temperatura", JOptionPane.PLAIN_MESSAGE, null, unidadesDeMedicion, "Celsius (°C) a Fahrenheit (°F)")).toString();
+					switch(opcion) {
+						case "Celsius (°C) a Fahrenheit (°F)":
+							double temperatura = (valorTemperatura * 1.8) + 32;
+							JOptionPane.showMessageDialog(null, "La temperatura es de: " + temperatura + "(°F)", "Conversor de Temperatura", JOptionPane.INFORMATION_MESSAGE);
+							break;
+					}
+					break;
 					
 			}
 			Repetir = 'N';
